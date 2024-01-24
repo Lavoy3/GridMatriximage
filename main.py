@@ -11,13 +11,8 @@ img = cv.resize(img, (2880, 1800))
 # Define the grid shape (rows, columns)
 grid_shape = (10, 10)
 
-# Define the color translation function
-def translate_color(color):
-  # Return the same color
-  return color
-
-# Draw the grid and translate the colors
-def draw_grid_and_translate_colors(img, grid_shape):
+# Draw the grid and use the original color
+def draw_grid_and_use_original_color(img, grid_shape):
   # Get the image height, width and channels
   h, w, c = img.shape
 
@@ -37,10 +32,7 @@ def draw_grid_and_translate_colors(img, grid_shape):
       # Get the cell color
       color = img[y1:y2, x1:x2].mean(axis=(0, 1))
 
-      # Translate the color
-      color = translate_color(color)
-
-      # Fill the cell with the translated color
+      # Fill the cell with the original color
       img[y1:y2, x1:x2] = color
 
       # Draw the cell border
@@ -50,7 +42,7 @@ def draw_grid_and_translate_colors(img, grid_shape):
   return img
 
 # Apply the function to the image
-img = draw_grid_and_translate_colors(img, grid_shape)
+img = draw_grid_and_use_original_color(img, grid_shape)
 
 # Show the image
 cv.imshow('Image', img)
